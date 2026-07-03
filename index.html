@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Move Countdown</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        #calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+    </style>
+</head>
+<body>
+    <h1>Move to Minnesota!!</h1>
+    <h2>Move Date: August 31, 2026</h2>
+    <button>Update Countdown</button>
+    <p id="countdown"></p>
+    <div id="calendar"></div>
+    <script>
+
+const moveDate = new Date(2026, 7, 31);
+
+const now = new Date();
+const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+const firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+const firstDayOfWeek = firstDay.getDay();
+const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+const calendarDiv = document.getElementById("calendar");
+const difference = moveDate - today;
+
+const daysRemaining =
+    Math.ceil(difference / (1000 * 60 * 60 * 24));
+
+document.getElementById("countdown").textContent =
+    `${daysRemaining} Days Remaining`;
+
+for (let i = 0; i < firstDayOfWeek; i++) {
+calendarDiv.innerHTML += `<p></p>`;
+}
+
+
+for (let day = 1; day <= daysInMonth; day++) {
+const currentDay = new Date(today.getFullYear(), today.getMonth(), day);
+if (currentDay < today) {
+    calendarDiv.innerHTML += `<p>X</p>`;
+} else {
+    calendarDiv.innerHTML += `<p>${day}</p>`;
+}
+}
+
+
+
+</script>
+</body>
+</html>
